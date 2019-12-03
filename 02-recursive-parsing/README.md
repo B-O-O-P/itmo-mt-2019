@@ -71,7 +71,7 @@ var x: array [1..10] of integer;
 |  `ε`      | EPS        |
 |  `$`      | EOF        |
 
-#### [Lexer для получения токенов](src/main/kotlin/ru/itmo/chizhikov/Lexer.kt)
+[Lexer для получения токенов](src/main/kotlin/ru/itmo/chizhikov/Lexer.kt)
 
 ## First and Follow
 
