@@ -1,0 +1,34 @@
+digraph example {
+node519821334[label="S"]
+node1781256139[label="var", color=red]
+node1223685984[label="X"]
+node1076835071[label="x", color=red]
+node1463757745[label="X''"]
+node1525262377[label="ε", color=red]
+node1837760739[label=":", color=red]
+node1418428263[label="array", color=red]
+node2059904228[label="[", color=red]
+node1836643189[label="D"]
+node1355316001[label="R"]
+node1597462040[label="N"]
+node403716510[label="1", color=red]
+node853119666[label="..", color=red]
+node559670971[label="N"]
+node1144648478[label="10", color=red]
+node1576861390[label="D''"]
+node600746945[label="ε", color=red]
+node1566502717[label="]", color=red]
+node1458849419[label="of", color=red]
+node1824835605[label="T"]
+node981661423[label="integer", color=red]
+node269468037[label=";", color=red]
+node519821334 -> {node1781256139 node1223685984 node1837760739 node1418428263 node2059904228 node1836643189 node1566502717 node1458849419 node1824835605 node269468037}
+node1223685984 -> {node1076835071 node1463757745}
+node1463757745 -> {node1525262377}
+node1836643189 -> {node1355316001 node1576861390}
+node1355316001 -> {node1597462040 node853119666 node559670971}
+node1597462040 -> {node403716510}
+node559670971 -> {node1144648478}
+node1576861390 -> {node600746945}
+node1824835605 -> {node981661423}
+}
