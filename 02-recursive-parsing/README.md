@@ -98,5 +98,5 @@ var x: array [1..10] of integer;
 
 Также приведу набор тестов(используется библиотека [JUnit](https://junit.org/junit5/)):
 
-[Тесты для Lexer](src/test/kotlin/ru/itmo/chizhikov/LexerTest.kt)
-[Тесты для Parser](src/test/kotlin/ru/itmo/chizhikov/ParserTest.kt)
+* [Тесты для Lexer](src/test/kotlin/ru/itmo/chizhikov/LexerTest.kt)
+* [Тесты для Parser](src/test/kotlin/ru/itmo/chizhikov/ParserTest.kt)
