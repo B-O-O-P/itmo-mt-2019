@@ -26,7 +26,7 @@ functionDefinition returns [StringBuilder value]:
         if ($fh.argTypes.size() > 1) {
             $value.append("{\n  ");
             for (int i = $fh.argTypes.size() - 1; i > 0; i--) {
-                $value.append($fh.argTypes.get(i) + " " + $fb.argsNames.get(i - 1) + " = a" + ($fh.argTypes.size() - i) + ";\n  ");
+                $value.append($fh.argTypes.get($fh.argTypes.size() - i - 1) + " " + $fb.argsNames.get(i - 1) + " = a" + ($fh.argTypes.size() - i) + ";\n  ");
             }
             $value.append("if ( ");
 

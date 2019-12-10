@@ -17,7 +17,26 @@ int fac(int a1) {
  return 0;
 }
 
+int gcd(int a2, int a1) {
+{
+  int a = a1;
+  int b = a2;
+  if ( (b==0) && (true) ) {
+    return a;
+  }
+}
+{
+  int a = a1;
+  int b = a2;
+  if ( (true) && (true) ) {
+    return gcd(a%b,b);
+  }
+}
+
+ return 0;
+}
+
 
 int main() {
- std::cout << fac(0);
+ std::cout << gcd(100,  40);
 }
