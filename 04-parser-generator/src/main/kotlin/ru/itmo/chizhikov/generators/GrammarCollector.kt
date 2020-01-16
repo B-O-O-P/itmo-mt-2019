@@ -2,6 +2,7 @@ package ru.itmo.chizhikov.generators
 
 import antlr.ru.itmo.chizhikov.gen.GrammarBaseListener
 import antlr.ru.itmo.chizhikov.gen.GrammarParser
+import ru.itmo.chizhikov.cleanUpCode
 import ru.itmo.chizhikov.generators.data.ExtendedElem
 import ru.itmo.chizhikov.generators.data.ProdElem
 import ru.itmo.chizhikov.generators.data.Production
@@ -36,8 +37,6 @@ class GrammarCollector : GrammarBaseListener() {
     override fun exitPckg(ctx: GrammarParser.PckgContext) {
         pckg = ctx.text.removePrefix("+package").cleanUpCode()
     }
-
-    private fun String.cleanUpCode() = this.trim('{', '}', ' ')
 
     // Parser
 
