@@ -1,0 +1,31 @@
++package ru.itmo.chizhikov.examples.calc
+
+|> expr
+
+expr : Int := term exprs(term) { exprs };
+exprs <acc: Int> : Int := PLUS term { val next = acc + term } exprs(next) {exprs}
+ | MINUS term { val next = acc - term } exprs(next) {exprs}
+ | {acc} ;
+
+term : Int := factor terms(factor) {terms} ;
+terms <acc: Int> : Int := MUL factor terms({acc * factor}) {terms}
+ | DIV factor terms({acc / factor}) {terms}
+ | {acc} ;
+
+factor : Int := single factors(single) {factors};
+factors <acc: Int> : Int := POW single factors({Math.pow(acc.toDouble(), single.toDouble()).toInt()}) {factors}
+ | {acc};
+
+single : Int := O expr C {expr} | num {num} ;
+num : Int := NUM {NUM.toInt()};
+
+PLUS = "+";
+MINUS = "-";
+POW = "^";
+DIV = "/";
+MUL = "*";
+O = "(";
+C = ")";
+NUM = '[0-9]+';
+
+WS => '\s+';
