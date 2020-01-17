@@ -11,7 +11,7 @@ import ru.itmo.chizhikov.generators.GrammarCollector
 import ru.itmo.chizhikov.generators.files.LexerGrammarFilesGenerator
 import ru.itmo.chizhikov.generators.files.ParserGrammarFilesGenerator
 import ru.itmo.chizhikov.generators.files.DefaultTestGrammarFilesGenerator
-import ru.itmo.chizhikov.runtime.ParsingException
+import ru.itmo.chizhikov.runtime.ParseException
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -63,6 +63,6 @@ fun main(args: Array<String>) {
 
         genAll(grammarName, outputDirectory, collector)
     } else {
-        throw ParsingException("Error with handling grammar file or output directory path")
+        throw ParseException("Error with handling grammar file or output directory path")
     }
 }

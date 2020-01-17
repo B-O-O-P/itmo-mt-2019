@@ -1,0 +1,23 @@
++package ru.itmo.chizhikov.examples.pascal
+
+|> s
+
+s : TreeNode := VAR x DOUBLECOLON ARRAY OQP d CQP OF type SEMICOLON {TreeNode("S",VAR,x,DOUBLECOLON,ARRAY,OQP,d,CQP,OF,type,SEMICOLON)};
+d : TreeNode := n DOUBLEDOT n {TreeNode("d",n[0],DOUBLEDOT,n[1])};
+x : TreeNode := ID {TreeNode("x", ID)};
+type : TreeNode := ID {TreeNode("type", ID)};
+n : TreeNode := NUM {TreeNode("n", NUM)};
+
+VAR = "var";
+ARRAY = "array";
+OF = "of";
+DOUBLEDOT = "..";
+OQP = "[";
+CQP = "]";
+SEMICOLON = ";";
+DOUBLECOLON = ":";
+
+NUM = '[0-9]+';
+ID = '[A-Za-z]+';
+
+WS => '\s+';

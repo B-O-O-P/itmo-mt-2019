@@ -7,9 +7,9 @@ import ru.itmo.chizhikov.runtime.GroupMatcherLexer
 private val _literals: Map<Token, String> = mapOf(
     0 to "+",
     1 to "-",
-    2 to "^",
-    3 to "/",
-    4 to "*",
+    2 to "/",
+    3 to "*",
+    4 to "^",
     5 to "(",
     6 to ")"
 )
@@ -24,9 +24,9 @@ private val _tokensToSkip = setOf(8)
 object TOKENS {
     val PLUS = 0
     val MINUS = 1
-    val POW = 2
-    val DIV = 3
-    val MUL = 4
+    val DIV = 2
+    val MUL = 3
+    val POW = 4
     val O = 5
     val C = 6
     val NUM = 7

@@ -5,7 +5,7 @@ import ru.itmo.chizhikov.generators.data.ExtendedElem
 import ru.itmo.chizhikov.generators.data.ProdElem
 import ru.itmo.chizhikov.generators.data.Production
 import ru.itmo.chizhikov.generators.data.Rule
-import ru.itmo.chizhikov.runtime.ParsingException
+import ru.itmo.chizhikov.runtime.ParseException
 
 class ParserGrammarFilesGenerator(private val collector: GrammarCollector) : AbstractGrammarFilesGenerator() {
 
@@ -79,7 +79,7 @@ class ParserGrammarFilesGenerator(private val collector: GrammarCollector) : Abs
 
     override fun generate(grammarName: String) = buildString {
         if (!checkLL1()) {
-            throw ParsingException("It is not an LL(1) grammar!")
+            throw ParseException("It is not an LL(1) grammar!")
         }
         val gn = grammarName.capitalize()
         collector.pckg?.let {
@@ -87,7 +87,7 @@ class ParserGrammarFilesGenerator(private val collector: GrammarCollector) : Abs
             newLine
         }
         printLine("import ru.itmo.chizhikov.runtime.Token")
-        printLine("import ru.itmo.chizhikov.runtime.ParsingException")
+        printLine("import ru.itmo.chizhikov.runtime.ParseException")
         newLine
         printLine("@Suppress(\"UNUSED_VARIABLE\")")
         printLine("class ${gn}Parser(private val lexer: ${gn}Lexer) {")
@@ -95,7 +95,7 @@ class ParserGrammarFilesGenerator(private val collector: GrammarCollector) : Abs
         scoped {
             printLine("private fun skip(token: Token): String {")
             scoped {
-                printLine("if (lexer.token != token) throw ParsingException.expectedNotFound(lexer, token)")
+                printLine("if (lexer.token != token) throw ParseException.expectedNotFound(lexer, token)")
                 printLine("val res = lexer.tokenValue ?: throw IllegalArgumentException(\"Cannot skip EOF token\")")
                 printLine("lexer.next()")
                 printLine("return res")
@@ -156,7 +156,7 @@ class ParserGrammarFilesGenerator(private val collector: GrammarCollector) : Abs
 
                     // else (error)
                     printLine(
-                        "else -> throw ParsingException.expectedNotFound(lexer, " +
+                        "else -> throw ParseException.expectedNotFound(lexer, " +
                                 "${m.values.flatten().joinToString { "TOKENS.$it" }})"
                     )
                 }
@@ -202,7 +202,7 @@ class ParserGrammarFilesGenerator(private val collector: GrammarCollector) : Abs
         .also {
             it.values.flatten().also {
                 if (it.size != it.distinct().size) {
-                    throw ParsingException("It is not an LL(1) grammar!")
+                    throw ParseException("It is not an LL(1) grammar!")
                 }
             }
         }

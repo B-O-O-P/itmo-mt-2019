@@ -39,8 +39,8 @@ open class GroupMatcherLexer(_reader: Reader,
                 .toRegex().findAll(text)
                 .map {
                     it.groups.mapIndexedNotNull { i, g ->
-                        if (i == 0 || g == null) null else TokenMatch(i, g.range.start, g.value)
-                    }.singleOrNull() ?: throw ParsingException("Ambiguous tokens")
+                        if (i == 0 || g == null) null else TokenMatch(i, g.range.first, g.value)
+                    }.singleOrNull() ?: throw ParseException("Ambiguous tokens")
                 }
                 .iterator()
     }
@@ -59,7 +59,7 @@ open class GroupMatcherLexer(_reader: Reader,
         token = groupsToTokens.getValue(g - 1)
         position = s
         tokenValue = v
-        if (token == UNKNOWN_CHAR) throw ParsingException("Unexpected symbol $v", position)
+        if (token == UNKNOWN_CHAR) throw ParseException("Unexpected symbol $v", position)
     }
 
     fun next() {

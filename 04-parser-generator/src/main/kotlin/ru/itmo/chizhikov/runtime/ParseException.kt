@@ -1,7 +1,7 @@
 package ru.itmo.chizhikov.runtime
 
-class ParsingException(message: String = "Parse error", val pos: Int? = null,
-                       val expectedAndFound: Pair<List<Token>, Token>? = null)
+class ParseException(message: String = "Parse error", val pos: Int? = null,
+                     val expectedAndFound: Pair<List<Token>, Token>? = null)
 
     : Exception(
         buildString {
@@ -14,6 +14,6 @@ class ParsingException(message: String = "Parse error", val pos: Int? = null,
 ) {
     companion object {
         fun expectedNotFound(lexer: GroupMatcherLexer, vararg expected: Token) =
-                ParsingException(pos = lexer.position, expectedAndFound = (expected.asList() to lexer.token))
+                ParseException(pos = lexer.position, expectedAndFound = (expected.asList() to lexer.token))
     }
 }

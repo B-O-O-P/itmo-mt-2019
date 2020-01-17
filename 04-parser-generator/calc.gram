@@ -13,7 +13,7 @@ terms <acc: Int> : Int := MUL factor terms({acc * factor}) {terms}
  | {acc} ;
 
 factor : Int := single factors(single) {factors};
-factors <acc: Int> : Int := POW single factors({Math.pow(acc.toDouble(), single.toDouble()).toInt()}) {factors}
+factors <acc: Int> : Int := POW single factors({Math.pow(single.toDouble(),acc.toDouble()).toInt()}) {factors}
  | {acc};
 
 single : Int := O expr C {expr} | num {num} ;
@@ -21,9 +21,9 @@ num : Int := NUM {NUM.toInt()};
 
 PLUS = "+";
 MINUS = "-";
-POW = "^";
 DIV = "/";
 MUL = "*";
+POW = "^";
 O = "(";
 C = ")";
 NUM = '[0-9]+';

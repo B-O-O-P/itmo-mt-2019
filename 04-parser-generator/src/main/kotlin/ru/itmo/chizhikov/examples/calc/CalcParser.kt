@@ -1,13 +1,13 @@
 package ru.itmo.chizhikov.examples.calc
 
 import ru.itmo.chizhikov.runtime.Token
-import ru.itmo.chizhikov.runtime.ParsingException
+import ru.itmo.chizhikov.runtime.ParseException
 
 @Suppress("UNUSED_VARIABLE")
 class CalcParser(private val lexer: CalcLexer) {
 
     private fun skip(token: Token): String {
-        if (lexer.token != token) throw ParsingException.expectedNotFound(lexer, token)
+        if (lexer.token != token) throw ParseException.expectedNotFound(lexer, token)
         val res = lexer.tokenValue ?: throw IllegalArgumentException("Cannot skip EOF token")
         lexer.next()
         return res
@@ -19,7 +19,7 @@ class CalcParser(private val lexer: CalcLexer) {
             val exprs = Exprs(term)
             exprs
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
     }
 
     private fun Exprs(acc: Int) : Int = when(lexer.token) {
@@ -40,7 +40,7 @@ class CalcParser(private val lexer: CalcLexer) {
         TOKENS.EOF, TOKENS.C -> {
             acc
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C)
     }
 
     private fun Term() : Int = when(lexer.token) {
@@ -49,7 +49,7 @@ class CalcParser(private val lexer: CalcLexer) {
             val terms = Terms(factor)
             terms
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
     }
 
     private fun Terms(acc: Int) : Int = when(lexer.token) {
@@ -68,7 +68,7 @@ class CalcParser(private val lexer: CalcLexer) {
         TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C -> {
             acc
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.MUL, TOKENS.DIV, TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.MUL, TOKENS.DIV, TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C)
     }
 
     private fun Factor() : Int = when(lexer.token) {
@@ -77,20 +77,20 @@ class CalcParser(private val lexer: CalcLexer) {
             val factors = Factors(single)
             factors
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
     }
 
     private fun Factors(acc: Int) : Int = when(lexer.token) {
         TOKENS.POW -> {
             val POW = skip(TOKENS.POW)
             val single = Single()
-            val factors = Factors(Math.pow(acc.toDouble(), single.toDouble()).toInt())
+            val factors = Factors(Math.pow(single.toDouble(),acc.toDouble()).toInt())
             factors
         }
         TOKENS.MUL, TOKENS.DIV, TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C -> {
             acc
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.POW, TOKENS.MUL, TOKENS.DIV, TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.POW, TOKENS.MUL, TOKENS.DIV, TOKENS.PLUS, TOKENS.MINUS, TOKENS.EOF, TOKENS.C)
     }
 
     private fun Single() : Int = when(lexer.token) {
@@ -104,7 +104,7 @@ class CalcParser(private val lexer: CalcLexer) {
             val num = Num()
             num
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.O, TOKENS.NUM)
     }
 
     private fun Num() : Int = when(lexer.token) {
@@ -112,7 +112,7 @@ class CalcParser(private val lexer: CalcLexer) {
             val NUM = skip(TOKENS.NUM)
             NUM.toInt()
         }
-        else -> throw ParsingException.expectedNotFound(lexer, TOKENS.NUM)
+        else -> throw ParseException.expectedNotFound(lexer, TOKENS.NUM)
     }
 
     fun parse() : Int { 
